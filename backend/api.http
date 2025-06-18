@@ -1,0 +1,44 @@
+POST http://localhost:3003/api/user/register
+Content-Type: application/json
+
+{
+    "name": "Adam",
+    "email": "adam123@gmail.com",
+    "password": "adampassword"
+}
+
+
+###
+
+POST http://localhost:3003/api/user/login
+Content-Type: application/json
+
+{
+    "email": "adam123@gmail.com",
+    "password": "adampassword"
+}
+
+###
+
+GET http://localhost:3003/api/user/logout
+
+###
+
+GET http://localhost:3003/api/user/getUser
+Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTEzOTFmYTY2MmMzYjY1M2I4ZmQ3NyIsImlhdCI6MTc1MDE1NTY4NX0.Y8BS5VFG8uesOG68nqPRa5qCH3P39n0dvivbuvjW7gU
+
+
+###
+
+GET http://localhost:3003/api/user/credits
+
+###
+
+POST http://localhost:3003/api/user/forget-password
+Content-Type: application/json
+
+{
+    "email": "adam123@gmail.com",
+    "newPassword": "adamPassword",
+    "confirmPassword": "adamPassword"
+}

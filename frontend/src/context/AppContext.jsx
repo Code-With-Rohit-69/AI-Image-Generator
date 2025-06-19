@@ -97,9 +97,9 @@ export const AppContextProvider = ({ children }) => {
         toast.success(data.message);
 
         setUser((prevUser) => ({
-        ...prevUser,
-        creditBalance: data.creditBalance,
-      }));
+          ...prevUser,
+          creditBalance: data.creditBalance,
+        }));
 
         return data.resultImage;
       } else {
@@ -118,6 +118,21 @@ export const AppContextProvider = ({ children }) => {
       if (data.success) {
       }
     } catch (error) {}
+  };
+
+  const handleCreditUpdate = async (credits) => {
+    try {
+      const { data } = await API.post("/payment/update-credits", { credits });
+      if (data.success) {
+        toast.success("Credits updated!");
+        await fetchUser();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error("Failed to update credits");
+      console.log("handleCreditUpdate error:", error.message);
+    }
   };
 
   const fetchUser = async () => {
@@ -139,7 +154,7 @@ export const AppContextProvider = ({ children }) => {
 
   useEffect(() => {
     fetchUser();
-  }, [showLogin]);
+  }, []);
 
   const value = {
     user,
@@ -159,6 +174,7 @@ export const AppContextProvider = ({ children }) => {
     showForgetPassword,
     handleResetPassword,
     handleCredit,
+    handleCreditUpdate,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

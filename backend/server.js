@@ -6,6 +6,7 @@ import cors from "cors";
 import userRouter from "./routes/user.route.js";
 import connectDB from "./config/db.js";
 import imageRouter from "./routes/image.route.js";
+import paymentRouter from "./routes/payment.route.js";
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/user", userRouter);
 app.use("/api/image", imageRouter);
+app.use("/api/payment", paymentRouter);
 
 const start = () => {
   app.listen(PORT, () => {

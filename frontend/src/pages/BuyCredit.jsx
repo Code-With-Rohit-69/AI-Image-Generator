@@ -3,8 +3,28 @@ import React from "react";
 import { assets, plans } from "../assets/assets";
 import { useApp } from "../context/AppContext";
 
+import { loadStripe } from "@stripe/stripe-js";
+import { useState } from "react";
+import API from "../services/api";
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
+
 const BuyCredit = () => {
   const { user } = useApp();
+
+  const [loading, setLoading] = useState(false);
+
+  const handleBuyCredits = async (credits) => {
+    setLoading(true);
+    const { data } = await API.post("/payment/create-checkout-session", {
+      credits,
+    });
+
+    const stripe = await stripePromise;
+    await stripe.redirectToCheckout({ sessionId: data.id });
+
+    setLoading(false);
+  };
 
   return (
     <div className="min-h-[80vh] text-center pt-14 pb-[10rem]">
@@ -28,7 +48,10 @@ const BuyCredit = () => {
               <span className="text-3xl font-medium">${data.price} </span>/{" "}
               {data.credits} credits
             </p>
-            <button className="w-full bg-gray-800 text-white mt-8 text-sm rounded-md py-2.5 min-w-52 cursor-pointer">
+            <button
+              className="w-full bg-gray-800 text-white mt-8 text-sm rounded-md py-2.5 min-w-52 cursor-pointer"
+              onClick={() => handleBuyCredits(data.credits)}
+            >
               {user ? "Purchase" : "Get Started"}
             </button>
           </div>

@@ -10,6 +10,7 @@ import { useApp } from "./context/AppContext";
 import ProtectedRoute from "./ProtectedRoute";
 import ForgetPassword from "./components/ForgetPassword";
 import Loader from "./Loader";
+import PaymentSuccess from "./components/PaymentSuccess";
 
 const App = () => {
   const { showLogin, userLoading, setShowLogin, user } = useApp();
@@ -44,6 +45,7 @@ const App = () => {
         />
 
         <Route path="/forget-password" element={<ForgetPassword />} />
+        <Route path="/payment-success" element={<PaymentSuccess />} />
       </Routes>
 
       <Toaster />

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 import { assets } from "../assets/assets";
 import { useApp } from "../context/AppContext";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Result = () => {
   const [image, setImage] = useState(assets.sample_img_1);
@@ -9,10 +11,17 @@ const Result = () => {
   const [loading, setLoading] = useState(false);
   const [input, setInput] = useState("");
 
-  const { generateImage } = useApp();
+  const { generateImage, user } = useApp();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (user?.creditBalance <= 0) {
+      toast.error("You have 0 credits. Redirecting to buy more.");
+      navigate("/buy");
+      return;
+    }
 
     setLoading(true);
 

@@ -95,6 +95,12 @@ export const AppContextProvider = ({ children }) => {
 
       if (data.success) {
         toast.success(data.message);
+
+        setUser((prevUser) => ({
+        ...prevUser,
+        creditBalance: data.creditBalance,
+      }));
+
         return data.resultImage;
       } else {
         toast.error(data.message);
@@ -103,6 +109,15 @@ export const AppContextProvider = ({ children }) => {
       console.log(`Error in generating Image : ${error.message}`);
       toast.error("Something went wrong");
     }
+  };
+
+  const handleCredit = async () => {
+    try {
+      const { data } = await API.get("user/credits");
+
+      if (data.success) {
+      }
+    } catch (error) {}
   };
 
   const fetchUser = async () => {
@@ -143,6 +158,7 @@ export const AppContextProvider = ({ children }) => {
     setShowForgetPassword,
     showForgetPassword,
     handleResetPassword,
+    handleCredit,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

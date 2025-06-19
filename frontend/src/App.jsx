@@ -9,9 +9,16 @@ import Login from "./components/Login";
 import { useApp } from "./context/AppContext";
 import ProtectedRoute from "./ProtectedRoute";
 import ForgetPassword from "./components/ForgetPassword";
+import Loader from "./Loader";
 
 const App = () => {
   const { showLogin, userLoading, setShowLogin, user } = useApp();
+
+  if (userLoading) {
+    return (
+      <Loader />
+    );
+  }
 
   return (
     <div className="px-4 sm:px-10 md:px-14 lg:px-28 min-h-screen bg-gradient-to-b from-teal-50 to-white-50">
@@ -22,13 +29,6 @@ const App = () => {
         <Route
           path="/result"
           element={
-            // userLoading ? (
-            //   <div className="text-center mt-10">Checking auth...</div>
-            // ) : user ? (
-            //   <Result />
-            // ) : (
-            //   setShowLogin(true)
-            // )
             <ProtectedRoute>
               <Result />
             </ProtectedRoute>

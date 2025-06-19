@@ -4,19 +4,17 @@ import { useApp } from "./context/AppContext";
 import toast from "react-hot-toast";
 
 const ProtectedRoute = ({ children }) => {
-  const { user, setShowLogin } = useApp();
-  const hasShownToast = useRef(false); 
+  const { user, setShowLogin, userLoading } = useApp();
+  const hasShownToast = useRef(false);
 
   useEffect(() => {
-    if (!user) {
+    if (!user && !userLoading) {
       setShowLogin(true);
-
-      if (!hasShownToast.current) {
-        toast.error("You are not logged in. Login First");
-        hasShownToast.current = true;
-      }
+      toast.error("You are not logged in. Login First");
     }
-  }, [user, setShowLogin]);
+  }, [user, userLoading]);
+
+  if (userLoading) return null;
 
   if (!user) {
     return <Navigate to="/" />;

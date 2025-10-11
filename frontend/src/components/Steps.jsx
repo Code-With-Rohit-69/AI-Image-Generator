@@ -18,10 +18,10 @@ const Steps = () => {
           Transform Words Into Stunning Images
         </p>
       </div>
-      <div className="">
+      <div className=" w-full">
         {stepsData.map((data, index) => (
           <div
-            className="shadow-md bg-white/20 px-7 py-4 flex my-4 w-2xl gap-3 duration-300"
+            className="shadow-md bg-white/20 px-7 py-4 flex my-4 w-full gap-3 duration-300"
             key={index}
           >
             <img src={data.icon} alt="" width={30} />

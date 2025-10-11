@@ -17,16 +17,16 @@ const Description = () => {
       <p className="text-center text-gray-600 text-[.7rem]">
         Turn your imagination into visuals
       </p>
-      <div className="flex gap-1 justify-center mt-[3rem] px-16">
-        <div className="w-[40%] flex items-center justify-center">
+      <div className="flex gap-1 justify-center mt-[3rem] flex-col sm:px-16 sm:flex-row">
+        <div className="sm:w-[40%] flex items-center justify-center">
           <img
             src={assets.sample_img_1}
             alt=""
             className="w-[70%] rounded-2xl image"
           />
         </div>
-        <div className="w-[60%]">
-          <h2 className="text-[1.1rem] font-medium text-gray-800 w-2xs mb-[1rem]">
+        <div className="sm:w-[60%]">
+          <h2 className="text-[1.1rem] font-medium text-gray-800 font-semibold mb-[1rem]">
             Introducing the AI-Powered Text to Image Generator
           </h2>
           <p className="text-[.8rem] text-gray-600">

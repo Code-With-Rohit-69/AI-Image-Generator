@@ -5,6 +5,7 @@ import { useApp } from "../context/AppContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const [deviceWidth, setDeviceWidth] = useState(1300);
 
   const { user, setShowLogin, handleLogout, fetchUser } = useApp();
 
@@ -34,6 +35,13 @@ const Navbar = () => {
     };
   }, [scrollTimeout]);
 
+
+  useEffect(() => {
+    window.addEventListener("resize", (e) => {
+      setDeviceWidth(e.target.innerWidth);
+    });
+  }, [deviceWidth]);
+
   return (
     <>
       <nav
@@ -47,9 +55,11 @@ const Navbar = () => {
           <div className="flex items-center justify-between py-4">
             <Link to="/">
               <img
-                src={assets.logo}
+                src={deviceWidth >= 400 ? assets.logo : assets.logo_icon}
                 alt="logo"
-                className="cursor-pointer w-28 sm:w-32 lg:w-40"
+                className={`cursor-pointer w-28 sm:w-32 lg:w-40 ${
+                  deviceWidth < 400 && "w-[30px]"
+                }`}
               />
             </Link>
 
@@ -84,7 +94,7 @@ const Navbar = () => {
                   </div>
                 </div>
               ) : (
-                <div className="flex items-center gap-40 sm:gap-5">
+                <div className="flex items-center gap-4 sm:gap-5 ">
                   <p
                     onClick={() => navigate("/buy")}
                     className="cursor-pointer"

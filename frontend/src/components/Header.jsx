@@ -29,7 +29,7 @@ const Header = () => {
       viewport={{ once: true }}
     >
       <div className="absolute left-[10%] top-[20%] lg:block sm:hidden handAnimation">
-        <span className="text-8xl">👋</span>
+        <span className="text-[10vw]">👋</span>
       </div>
       <div className="flex gap-2 bg-white text-gray-600 text-[.6rem] px-7 py-1 border border-gray-300 rounded-full">
         <span>Best text to image generator</span>
@@ -54,7 +54,7 @@ const Header = () => {
           , in seconds.
         </motion.p>
         <motion.p
-          className="text-gray-700 text-[.7rem] w-[22rem] text-center my-4"
+          className="text-gray-700 text-[.7rem] w-full sm:w-[22rem] text-center my-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
@@ -79,7 +79,7 @@ const Header = () => {
       </motion.div>
       <div className="flex items-center gap-3 mt-6 flex-col">
         <motion.div
-          className="flex items-center gap-3"
+          className="flex items-center gap-3 flex-wrap justify-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1 }}
